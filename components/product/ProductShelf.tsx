@@ -4,7 +4,7 @@ import SliderControllerJS from "deco-sites/fashion/islands/SliderJS.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import { useId } from "preact/hooks";
-import SendEventOnLoad from "deco-sites/fashion/components/SendEventOnLoad.tsx";
+import { SendEventOnLoad } from "deco-sites/fashion/sdk/analytics.tsx";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import type { LoaderReturnType } from "$live/types.ts";

@@ -5,7 +5,7 @@ import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
 import { useVariantPossibilities } from "deco-sites/fashion/sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
-import { sendEventOnClick } from "deco-sites/fashion/sdk/analytics.ts";
+import { SendEventOnClick } from "deco-sites/fashion/sdk/analytics.tsx";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 
 interface Props {
@@ -52,8 +52,23 @@ function ProductCard({ product, preload, itemListName }: Props) {
       class="card card-compact card-bordered border-transparent hover:border-base-200 group"
       data-deco="view-product"
       id={`product-card-${productID}`}
-      {...sendEventOnClick(clickEvent)}
     >
+      <SendEventOnClick
+        id={`product-card-${productID}`}
+        event={{
+          name: "select_item" as const,
+          params: {
+            item_list_name: itemListName,
+            items: [
+              mapProductToAnalyticsItem({
+                product,
+                price,
+                listPrice,
+              }),
+            ],
+          },
+        }}
+      />
       <figure class="relative">
         <div class="absolute top-0 right-0">
           <WishlistIcon productGroupID={productGroupID} productID={productID} />

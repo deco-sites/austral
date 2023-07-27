@@ -1,8 +1,8 @@
 import { useComputed, useSignal } from "@preact/signals";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
-import { useWishlist } from "deco-sites/std/commerce/vtex/hooks/useWishlist.ts";
-import { useUser } from "deco-sites/std/commerce/vtex/hooks/useUser.ts";
+import { useWishlist } from "deco-sites/std/packs/vtex/hooks/useWishlist.ts";
+import { useUser } from "deco-sites/std/packs/vtex/hooks/useUser.ts";
 
 interface Props {
   productID: string;
@@ -21,7 +21,7 @@ function WishlistButton({
   const listItem = useComputed(() => getItem(item));
   const fetching = useSignal(false);
 
-  const isUserLoggedIn = Boolean(user.value?.email);
+  const isUserLoggedIn = Boolean(user.user?.value?.email);
   const inWishlist = Boolean(listItem.value);
 
   return (
@@ -45,9 +45,7 @@ function WishlistButton({
 
         try {
           fetching.value = true;
-          inWishlist
-            ? await removeItem(listItem.value!.id)
-            : await addItem(item);
+          inWishlist ? await removeItem(listItem.value!) : await addItem(item);
         } finally {
           fetching.value = false;
         }

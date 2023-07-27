@@ -14,20 +14,11 @@ import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import ProductCard from "deco-sites/fashion/components/product/ProductCard.tsx";
 import { Slider } from "deco-sites/fashion/components/ui/Slider.tsx";
-import { useAutocomplete } from "deco-sites/std/commerce/vtex/hooks/useAutocomplete.ts";
+import { useAutocomplete } from "deco-sites/std/packs/vtex/hooks/useAutocomplete.ts";
 import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 import type { Product, Suggestion } from "deco-sites/std/commerce/types.ts";
-import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 
 import SearchTermList from "./SearchTermList.tsx";
-
-declare global {
-  interface Window {
-    DECO_SITES_STD: {
-      sendAnalyticsEvent: (args: AnalyticsEvent) => void;
-    };
-  }
-}
 
 function CloseButton() {
   const { displaySearchbar } = useUI();
